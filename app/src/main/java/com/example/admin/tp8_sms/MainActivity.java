@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.telephony.SmsManager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -30,10 +31,14 @@ public class MainActivity extends AppCompatActivity {
                 String contenu = contenuTV.getText().toString();
 
                 //Ouverture de l'application permettant d'envoyer le SMS, avec les informations déjà saisies
-                String uri = "smsto:" + numero;
+                /*String uri = "smsto:" + numero;
                 Intent intent = new Intent(Intent.ACTION_SENDTO, Uri.parse(uri));
                 intent.putExtra("sms_body", contenu);
-                startActivity(intent);
+                startActivity(intent);*/
+
+                //Envoi du SMS directement
+                SmsManager smsManager = SmsManager.getDefault();
+                smsManager.sendTextMessage(numero, null, contenu, null, null);
             }
         });
     }
